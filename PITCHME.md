@@ -29,7 +29,9 @@ int main() {
 }
 ```
 ## python
+```
 print "Hello World!"
+```
 
 #HSLIDE
 
@@ -100,3 +102,12 @@ for(int i = 0; i < 10; i++)
 	for(int j = 0; j < 10; j++)
 		sum += T[i][j];
 ```
+
+#HSLIDE
+
+# CUDA
+
+#HSLIDE
+
+# Rozkład wątków
+![Watki](http://docs.nvidia.com/cuda/cuda-c-programming-guide/graphics/grid-of-thread-blocks.png)
