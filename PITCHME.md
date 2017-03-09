@@ -8,7 +8,7 @@ A C? wiesz kto C wymyslil? Amerykanie! I to jest jezyk!"
 
 #HSLIDE
 
-# Główne różnice z python
+## Główne różnice
 
 - kompilowany, nie interpretowany
 - bloki kodu oznaczone `{ }`, a nie wcięciami
@@ -19,8 +19,8 @@ A C? wiesz kto C wymyslil? Amerykanie! I to jest jezyk!"
 
 #HSLIDE
 
-# Hello World
-## C:
+## Hello World
+### C:
 ```
 #include <stdio.h>
 int main() {
@@ -33,9 +33,7 @@ print "Hello World!"
 
 #HSLIDE
 
-# Silnie typowany
-
-Funkcja minimum.
+## Silnie typowany
 
 **python**
 ```
@@ -61,9 +59,7 @@ long long min(long long a, long long b) {
 
 #HSLIDE
 
-# Brak fancy struktur 1/2
-
-Stworzenie tablicy liczb od 0 to 100.
+## Brak fancy struktur 1/2
 
 **python**
 ```
@@ -82,9 +78,9 @@ for (int i = 0; i < 100; i ++) {
 free(T)
 ```
 
-# Brak fancy struktur 2/2
+#HSLIDE
 
-Zsumowanie liczb w macierzy:
+## Brak fancy struktur 2/2
 
 **python**
 ```
