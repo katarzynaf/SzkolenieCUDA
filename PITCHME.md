@@ -111,3 +111,13 @@ for(int i = 0; i < 10; i++)
 
 # Rozkład wątków
 ![Watki](http://docs.nvidia.com/cuda/cuda-c-programming-guide/graphics/grid-of-thread-blocks.png)
+
+#HSLIDE
+
+# Rozkład pamięci
+![Pamięć](http://docs.nvidia.com/cuda/cuda-c-programming-guide/graphics/memory-hierarchy.png)
+
+#HSLIDE
+![DeviceQuery](devicequery.png)
+
+
