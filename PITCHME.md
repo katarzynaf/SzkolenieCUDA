@@ -109,15 +109,41 @@ for(int i = 0; i < 10; i++)
 
 #HSLIDE
 
-# Rozkład wątków
+### Rozkład wątków
 ![Watki](http://docs.nvidia.com/cuda/cuda-c-programming-guide/graphics/grid-of-thread-blocks.png)
 
 #HSLIDE
 
-# Rozkład pamięci
+### Rozkład pamięci
 ![Pamięć](http://docs.nvidia.com/cuda/cuda-c-programming-guide/graphics/memory-hierarchy.png)
 
 #HSLIDE
 ![DeviceQuery](devicequery.png)
 
+#HSLIDE
+## Kopiowanie i alokowanie danych na GPU i z GPU
+```
+float *gpuMemory;
+cudaMalloc((void **)&gpuMemory, size);
+float *hostMemory = (float *)malloc(size);
+cudaMemcpy(gpuMemory, hostMemory, size, cudaMemcpyHostToDevice);
+// odpalenie kernela
+cudaMemcpy(hostMemory, gpuMemory, size, cudaMemcpyDeviceToHost);
+cudaFree(gpuMemory);
+free(hostMemory);
+```
+
+#HSLIDE
+## Definiowanie i odpalanie kernela
+```
+__global__ void
+vectorAdd(const float *A, const float *B, float *C, int numElements)
+{
+    //computation
+}
+```
+```
+vectorAdd<<<blocksPerGrid, threadsPerBlock>>>(d_A, d_B, d_C, numElements);
+```
+__global__ markuje funkcje, które są widoczne z GPU.
 
