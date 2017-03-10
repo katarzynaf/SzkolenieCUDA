@@ -109,5 +109,71 @@ for(int i = 0; i < 10; i++)
 
 #HSLIDE
 
-# Rozkład wątków
+### Rozkład wątków
 ![Watki](http://docs.nvidia.com/cuda/cuda-c-programming-guide/graphics/grid-of-thread-blocks.png)
+
+#HSLIDE
+
+### Rozkład pamięci
+![Pamięć](http://docs.nvidia.com/cuda/cuda-c-programming-guide/graphics/memory-hierarchy.png)
+
+#HSLIDE
+![DeviceQuery](devicequery.png)
+
+#HSLIDE
+## Kopiowanie i alokowanie danych na GPU i z GPU
+```
+float *gpuMemory;
+cudaMalloc((void **)&gpuMemory, size);
+float *hostMemory = (float *)malloc(size);
+cudaMemcpy(gpuMemory, hostMemory, size, cudaMemcpyHostToDevice);
+// odpalenie kernela
+cudaMemcpy(hostMemory, gpuMemory, size, cudaMemcpyDeviceToHost);
+cudaFree(gpuMemory);
+free(hostMemory);
+```
+
+#HSLIDE
+## Definiowanie i odpalanie kernela
+```
+__global__ void
+vectorAdd(const float *A, const float *B, float *C, int numElements)
+{
+    //computation
+}
+```
+```
+vectorAdd<<<blocksPerGrid, threadsPerBlock>>>(d_A, d_B, d_C, numElements);
+```
+__global__ markuje funkcje, które są widoczne z GPU.
+
+#HSLIDE
+Pamiętajcie, żeby sprawdzać zawsze czy funkcje CUDY kończą się błędem:
+
+```
+cudaError_t err = cudaSuccess;
+float *gpuMemory;
+err = cudaMalloc((void **)&gpuMemory, size);
+if (err != cudaSuccess) {
+	fprintf(stderr, "Failed to allocate memory on GPU (error code %s).\n", cudaGetErrorString(err));
+}
+```
+
+#HSLIDE
+## Ćwiczenia 1/2
+Dodawanie wektorów. Trzeba dokończyć skrypt ex1/vectorAdd.cu
+
+Kompilowanie kodu odbywa się metodą `make`. Potraktujmy to narazie jako czarną skrzynkę bez wdawania się w szczegóły.
+
+#HSLIDE
+## Ćwiczenie 2/2
+Mnożenie macierzy. Trzeba dokończyć skrypt ex2/matrixMul.cu.
+
+Flagą `__shared__` oznaczamy dane, które są współdzielone w obrębie bloku.
+
+Metoda `__syncthreads()` wywołuje barierę, która czeka aż wszystki wątki z bloku skończą pracę.
+
+![MatrixMul](http://docs.nvidia.com/cuda/cuda-c-programming-guide/graphics/matrix-multiplication-with-shared-memory.png)
+
+
+
