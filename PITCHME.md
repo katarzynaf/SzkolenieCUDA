@@ -61,6 +61,18 @@ long long min(long long a, long long b) {
 
 #HSLIDE
 
+## Wskaźniki
+Co znaczą te wszystkie:
+```
+float *f;
+float p = 0.1;
+f = &p;
+float x = *f;
+float **g = &f;
+```
+
+#HSLIDE
+
 ## Brak fancy struktur 1/2
 
 **python**
