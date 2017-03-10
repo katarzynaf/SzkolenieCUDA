@@ -173,6 +173,10 @@ Flagą `__shared__` oznaczamy dane, które są współdzielone w obrębie bloku.
 
 Metoda `__syncthreads()` wywołuje barierę, która czeka aż wszystki wątki z bloku skończą pracę.
 
+#HSLIDE
+
+##Obrazek do ćwiczenia 2/2
+
 ![MatrixMul](http://docs.nvidia.com/cuda/cuda-c-programming-guide/graphics/matrix-multiplication-with-shared-memory.png)
 
 
