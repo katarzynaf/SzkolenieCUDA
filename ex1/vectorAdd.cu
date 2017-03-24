@@ -32,6 +32,11 @@
 __global__ void
 vectorAdd(const float *A, const float *B, float *C, int numElements)
 {
+
+    int i = blockDim.x * blockIdx.x + threadIdx.x;
+    if( i < numElements){
+        C[i] = A[i] + B[i];
+    }
 	// TODO - write vectorAdd function
 }
 
@@ -73,6 +78,15 @@ main(void)
     }
 
 	float *d_A = NULL, *d_B = NULL, *d_C = NULL;
+        
+        cudaMalloc((void **)&d_A,size);
+        cudaMalloc((void **)&d_B,size);
+        cudaMalloc((void **)&d_C,size);
+        
+        cudaMemcpy(d_A, h_A, size, cudaMemcpyHostToDevice);
+        cudaMemcpy(d_B, h_B, size, cudaMemcpyHostToDevice);
+        cudaMemcpy(d_C, h_C, size, cudaMemcpyHostToDevice);
+
 	// TODO allocate memory on device for d_A, d_B, d_C
 	// Size of allocated memory should be the same as on host.
 
@@ -90,8 +104,10 @@ main(void)
         fprintf(stderr, "Failed to launch vectorAdd kernel (error code %s)!\n", cudaGetErrorString(err));
         exit(EXIT_FAILURE);
     }
-
-	// TODO - copy memory from device to host i.e. from d_C to C
+        
+        cudaMemcpy(h_A, d_A, size, cudaMemcpyDeviceToHost);
+        cudaMemcpy(h_B, d_B, size, cudaMemcpyDeviceToHost);
+        cudaMemcpy(h_C, d_C, size, cudaMemcpyDeviceToHost);
 
     // Verify that the result vector is correct
     for (int i = 0; i < numElements; ++i)
@@ -106,6 +122,9 @@ main(void)
     printf("Test PASSED\n");
 
     // TODO - Free device global memory 
+    cudaFree(d_A);
+    cudaFree(d_B);
+    cudaFree(d_C);
 
     // Free host memory
     free(h_A);
